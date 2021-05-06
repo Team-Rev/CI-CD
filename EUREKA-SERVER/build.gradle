@@ -1,12 +1,12 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.9.RELEASE'
+	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
 
 group = 'rev.team'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {
@@ -19,33 +19,16 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "Hoxton.SR10")
+	set('springCloudVersion', "2020.0.2")
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	testCompile('org.springframework.security:spring-security-test')
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
-
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-
-
-	compile 'io.jsonwebtoken:jjwt-api:0.11.2'
-	runtime 'io.jsonwebtoken:jjwt-impl:0.11.2',
-			'io.jsonwebtoken:jjwt-jackson:0.11.2'
-	runtimeOnly 'mysql:mysql-connector-java'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 dependencyManagement {
