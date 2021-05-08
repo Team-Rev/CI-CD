@@ -5,10 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import rev.team.PROBLEM_SERVICE.domain.entity.MultipleChoice;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface MultipleChoiceRepository extends JpaRepository<MultipleChoice, Long> {
 
     Optional<MultipleChoice> findByIdAndQuestionId(Long id, Long questionId);
+
+    List<MultipleChoice> findAllByQuestionIdAndIsCorrect(Long questionId, Boolean isCorrect);
 }
