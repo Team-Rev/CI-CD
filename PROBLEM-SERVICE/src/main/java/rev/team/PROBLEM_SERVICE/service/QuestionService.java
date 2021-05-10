@@ -66,7 +66,8 @@ public class QuestionService {
         Set<AnswerChoice> answerChoiceHashSet;
         for(Submit nowSubmit : submits) {
             answerChoiceHashSet = new HashSet<>();
-            nowCorrect = true;
+
+            nowCorrect = nowSubmit.getMultipleChoiceIds().size() == multipleChoiceRepository.findAllByQuestionIdAndIsCorrect(nowSubmit.getQuestionId(), true).size();
             AnswerDetail detail = AnswerDetail.builder()
                     .answerDetailId(answerDetailRepository.count()+1)
                     .questionId(nowSubmit.getQuestionId())

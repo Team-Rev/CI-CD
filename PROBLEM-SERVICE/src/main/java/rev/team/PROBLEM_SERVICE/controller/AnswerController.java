@@ -3,8 +3,7 @@ package rev.team.PROBLEM_SERVICE.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import rev.team.PROBLEM_SERVICE.domain.entity.AnswerMain;
-import rev.team.PROBLEM_SERVICE.domain.entity.AnswerSummary;
-import rev.team.PROBLEM_SERVICE.domain.repository.AnswerMainRepository;
+import rev.team.PROBLEM_SERVICE.domain.entity.ResultSummary;
 import rev.team.PROBLEM_SERVICE.service.AnswerService;
 
 import java.util.List;
@@ -25,7 +24,12 @@ public class AnswerController {
     }
 
     @GetMapping("/answer/summary")
-    public List<AnswerSummary> getAnswerSummary(@RequestParam("id") String id){
+    public List<AnswerMain> getAnswerSummary(@RequestParam("id") String id){
         return answerService.getAnswerSummary(id);
+    }
+
+    @GetMapping("/answer/result")
+    public List<ResultSummary> getResult(@RequestParam("id") String id){
+        return answerService.getResult(id);
     }
 }
