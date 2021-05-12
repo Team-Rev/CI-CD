@@ -22,6 +22,9 @@ zuul:
     PROBLEM-SERVICE:
       path: /problem/**
       serviceId: PROBLEM-SERVICE
+    POINT-SERVICE:
+      path: /point/**
+      serviceId: POINT-SERVICE
   host:
     time-to-live: 1
     connect-timeout-millis: 5000
