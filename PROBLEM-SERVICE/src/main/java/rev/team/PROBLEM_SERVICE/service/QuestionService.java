@@ -3,10 +3,10 @@ package rev.team.PROBLEM_SERVICE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import rev.team.PROBLEM_SERVICE.domain.dto.SubmitDTO;
 import rev.team.PROBLEM_SERVICE.domain.entity.*;
 import rev.team.PROBLEM_SERVICE.domain.repository.*;
 
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -18,18 +18,21 @@ public class QuestionService {
     private final AnswerMainRepository answerMainRepository;
     private final AnswerDetailRepository answerDetailRepository;
     private final AnswerChoiceRepository answerChoiceRepository;
-
+    private final AnswerTotalRepository answerTotalRepository;
     @Autowired
     public QuestionService(QuestionRepository questionRepository
             , MultipleChoiceRepository multipleChoiceRepository
             , AnswerMainRepository answerMainRepository
-            , AnswerDetailRepository answerDetailRepository, AnswerChoiceRepository answerChoiceRepository){
+            , AnswerDetailRepository answerDetailRepository
+            , AnswerChoiceRepository answerChoiceRepository
+            , AnswerTotalRepository answerTotalRepository){
 
         this.questionRepository = questionRepository;
         this.multipleChoiceRepository = multipleChoiceRepository;
         this.answerMainRepository = answerMainRepository;
         this.answerDetailRepository = answerDetailRepository;
         this.answerChoiceRepository = answerChoiceRepository;
+        this.answerTotalRepository = answerTotalRepository;
     }
 
     //한 문제 가져오기
@@ -98,9 +101,59 @@ public class QuestionService {
         main.setCorrectCount((int)details.stream().filter(AnswerDetail::isCorrect).count());
         main.setDetails(details);
         answerMainRepository.saveAndFlush(main);
+        updateTotal(main.getUserId(), main.getTotalCount(), main.getCorrectCount());
+        saveCategory(main);
         return main;
     }
 
+    //TODO: 제출 시에 기록 종합 계속 업데이트
+    private void updateTotal(String userId, Integer total, Integer correct){
+        Optional<AnswerTotal> answerTotal = answerTotalRepository.findById(userId);
+        if(answerTotal.isPresent()){
+            AnswerTotal now = answerTotal.get();
+            now.setExamCount(now.getExamCount()+1);
+            now.setTotalQuestionCount(now.getTotalQuestionCount()+total);
+            now.setTotalCorrectCount(now.getTotalCorrectCount()+correct);
+            now.setCorrectAverage( (int)((float)now.getTotalCorrectCount()/ (float)now.getTotalQuestionCount() *100) );// 다시 평균 계산
+            answerTotalRepository.save(now);
+        }else{
+            answerTotalRepository.save(AnswerTotal.builder()
+                    .userId(userId)
+                    .examCount(1)
+                    .totalQuestionCount(total)
+                    .totalCorrectCount(correct)
+                    .correctAverage((int) ((float) correct / (float)total * 100))
+                    .build());
+        }
+    }
+
+    //TODO: 문제 제출시에 AnswerMain에 핵심 카테고리 생성
+    public void saveCategory(AnswerMain answerMain){
+        HashMap<String, Integer> mainCategory = new HashMap<>();
+        HashMap<String, Integer> subCategory = new HashMap<>();
+
+        for(AnswerDetail detail : answerMain.getDetails()){
+            Question question = questionRepository.findById(detail.getQuestionId()).orElse(null);
+            assert question != null;
+            mainCategory.put(question.getMainCategory(), mainCategory.getOrDefault(question.getMainCategory(), 0)+1);
+            subCategory.put(question.getSubCategory(), subCategory.getOrDefault(question.getSubCategory(), 0)+1);
+        }
+        Integer max = 0;
+        String result = "";
+        for(String key : mainCategory.keySet()){
+            Integer now = mainCategory.get(key);
+            if(now > max) result = key;
+        }
+        answerMain.setMainCategory(result);
+        max = 0;
+        result = "";
+        for(String key : subCategory.keySet()){
+            Integer now = subCategory.get(key);
+            if(now > max) result = key;
+        }
+        answerMain.setSubCategory(result);
+        answerMainRepository.save(answerMain);
+    }
 
     public void submitQuestion(Long id, Question question) {
         //TODO: 해당 문제 정답 체크해서 기록하기

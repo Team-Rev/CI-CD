@@ -36,10 +36,11 @@ rev/team/PROBLEM_SERVICE/service/AnswerService.java
  rev.team.PROBLEM_SERVICE.service.AnswerService
 rev/team/PROBLEM_SERVICE/domain/repository/MultipleChoiceRepository.java
  rev.team.PROBLEM_SERVICE.domain.repository.MultipleChoiceRepository
+rev/team/PROBLEM_SERVICE/domain/entity/ResultSummary.java
+ rev.team.PROBLEM_SERVICE.domain.entity.ResultSummary
+ rev.team.PROBLEM_SERVICE.domain.entity.ResultSummary$ResultSummaryBuilder
 rev/team/PROBLEM_SERVICE/domain/repository/AnswerMainRepository.java
  rev.team.PROBLEM_SERVICE.domain.repository.AnswerMainRepository
 rev/team/PROBLEM_SERVICE/domain/entity/MultipleChoice.java
  rev.team.PROBLEM_SERVICE.domain.entity.MultipleChoice
  rev.team.PROBLEM_SERVICE.domain.entity.MultipleChoice$MultipleChoiceBuilder
-rev/team/PROBLEM_SERVICE/config/WebConfig.java
- rev.team.PROBLEM_SERVICE.config.WebConfig

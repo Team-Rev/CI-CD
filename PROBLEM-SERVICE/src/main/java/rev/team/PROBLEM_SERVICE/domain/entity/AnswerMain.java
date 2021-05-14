@@ -30,6 +30,10 @@ public class AnswerMain {
 
     private int correctCount; // 맞힌 문제 갯수
 
+    private String mainCategory;
+
+    private String subCategory;
+
     @OneToMany(mappedBy = "answerMain")
     private Set<AnswerDetail> details; // 선택한 답안
 }
