@@ -1,4 +1,4 @@
-package rev.team.POINT_SERVICE.domain.entity;
+package rev.team.POINT_SERVICE.domain.request;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PointDTO {
+public class PointReasonRequest {
 
     private int point;
 

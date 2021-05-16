@@ -30,5 +30,5 @@ eureka:
       defaultZone: http://34.64.73.179:8761/eureka
   instance:
   #  hostname: 10.178.0.3
-    hostname: localhost
-  #  hostname: 121.124.72.50
+  #  hostname: localhost
+    hostname: 121.124.72.50
