@@ -48,7 +48,7 @@ public class PointService {
     }
 
     public String delete(Long id) {
-        if (pointRecordRepository.findById(id).isPresent()) {
+        if (!pointRecordRepository.findById(id).isEmpty()) {
             pointRecordRepository.deleteById(id);
         }
         pointReasonRepository.deleteById(id);
@@ -56,7 +56,7 @@ public class PointService {
     }
 
     public String update(Long id, PointDTO pointDTO) {
-        if (pointRecordRepository.findById(id).isPresent()) {
+        if (!pointRecordRepository.findById(id).isEmpty()) {
             pointRecordRepository.updateById(id, pointDTO.getReason(), pointDTO.getPoint());
         }
         pointReasonRepository.updateById(id, pointDTO.getReason(), pointDTO.getPoint());
