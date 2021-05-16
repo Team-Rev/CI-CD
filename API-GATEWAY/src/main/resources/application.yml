@@ -25,6 +25,9 @@ zuul:
     POINT-SERVICE:
       path: /point/**
       serviceId: POINT-SERVICE
+    BOARD-SERVICE:
+      path: /board/**
+      serviceId: BOARD-SERVICE
   host:
     time-to-live: 1
     connect-timeout-millis: 5000
