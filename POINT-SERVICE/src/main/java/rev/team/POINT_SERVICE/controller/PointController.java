@@ -28,11 +28,6 @@ public class PointController {
         return pointService.insert(pointDTO);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deletePointReason(@PathVariable("id") Long id) {
-        return pointService.delete(id);
-    }
-
     @PatchMapping("/edit/{id}")
     public String updatePointReason(@PathVariable("id") Long id, @RequestBody PointDTO pointDTO) {
         return pointService.update(id, pointDTO);

@@ -12,7 +12,7 @@ public interface PointRecordRepository extends JpaRepository<PointRecord, Long> 
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE point_history SET point_reason = :reason, point = :point WHERE (point_reason_id = :id);", nativeQuery = true)
+    @Query(value = "UPDATE point_record SET point_reason = :reason, point = :point WHERE (point_reason_id = :id);", nativeQuery = true)
     void updateById(Long id, String reason, int point);
 
 

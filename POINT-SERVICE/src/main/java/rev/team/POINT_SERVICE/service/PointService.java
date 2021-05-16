@@ -47,14 +47,6 @@ public class PointService {
         return "CREATE SUCCESS";
     }
 
-    public String delete(Long id) {
-        if (!pointRecordRepository.findById(id).isEmpty()) {
-            pointRecordRepository.deleteById(id);
-        }
-        pointReasonRepository.deleteById(id);
-        return "DELETE SUCCESS";
-    }
-
     public String update(Long id, PointDTO pointDTO) {
         if (!pointRecordRepository.findById(id).isEmpty()) {
             pointRecordRepository.updateById(id, pointDTO.getReason(), pointDTO.getPoint());
