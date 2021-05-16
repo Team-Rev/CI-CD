@@ -2,8 +2,9 @@ package rev.team.POINT_SERVICE.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import rev.team.POINT_SERVICE.domain.entity.PointDTO;
+import rev.team.POINT_SERVICE.domain.request.PointReasonRequest;
 import rev.team.POINT_SERVICE.domain.entity.PointReason;
+import rev.team.POINT_SERVICE.domain.request.PointRecordRequest;
 import rev.team.POINT_SERVICE.service.PointService;
 
 import java.util.List;
@@ -24,17 +25,17 @@ public class PointController {
     }
 
     @PostMapping("/create")
-    public String insertPointReason(@RequestBody PointDTO pointDTO) {
-        return pointService.insert(pointDTO);
+    public String insertPointReason(@RequestBody PointReasonRequest pointReasonRequest) {
+        return pointService.insert(pointReasonRequest);
     }
 
     @PatchMapping("/edit/{id}")
-    public String updatePointReason(@PathVariable("id") Long id, @RequestBody PointDTO pointDTO) {
-        return pointService.update(id, pointDTO);
+    public String updatePointReason(@PathVariable("id") Long id, @RequestBody PointReasonRequest pointReasonRequest) {
+        return pointService.update(id, pointReasonRequest);
     }
 
     @PostMapping("/record")
-    public String recordPoint(@RequestBody String userId, @RequestBody Long reasonId) {
-        return pointService.record(userId, reasonId);
+    public String recordPoint(@RequestBody PointRecordRequest pointRecordRequest) {
+        return pointService.record(pointRecordRequest);
     }
 }
