@@ -1,2 +1,0 @@
-rev/team/PROBLEM_SERVICE/controller/QuestionControllerTest.java
- rev.team.PROBLEM_SERVICE.controller.QuestionControllerTest
