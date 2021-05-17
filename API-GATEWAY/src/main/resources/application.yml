@@ -22,12 +22,12 @@ zuul:
     PROBLEM-SERVICE:
       path: /problem/**
       serviceId: PROBLEM-SERVICE
-    POINT-SERVICE:
-      path: /point/**
-      serviceId: POINT-SERVICE
     BOARD-SERVICE:
       path: /board/**
       serviceId: BOARD-SERVICE
+    POINT-SERVICE:
+      path: /point/**
+      serviceId: POINT-SERVICE
   host:
     time-to-live: 1
     connect-timeout-millis: 5000
@@ -48,8 +48,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
+#      defaultZone: http://3.35.24.199:8761/eureka
       defaultZone: http://10.178.0.3:8761/eureka
-    #  defaultZone: http://localhost:8761/eureka
   instance:
     hostname: 10.178.0.3
-  #  hostname: localhost
