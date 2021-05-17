@@ -1,2 +1,0 @@
-rev/team/EUREKA_SERVER/EurekaServerApplication.java
- rev.team.EUREKA_SERVER.EurekaServerApplication
