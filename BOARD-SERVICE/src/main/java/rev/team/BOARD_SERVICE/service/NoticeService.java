@@ -40,7 +40,7 @@ public class NoticeService {
     public List<NoticeSummaryDTO> getPinedNoticeSummaries() {
         noticeSummaryDTOS= new ArrayList<>();
         for(NoticeSummary noticeSummary : noticeRepository.findAllByPined(true, Sort.by(Sort.Direction.DESC, "noticeId"))){
-            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
+            String nickname = restTemplate.getForObject("http://10.178.0.3:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
             noticeSummaryDTOS.add(NoticeSummaryDTO.builder()
                     .noticeId(noticeSummary.getNoticeId())
                     .title(noticeSummary.getTitle())
