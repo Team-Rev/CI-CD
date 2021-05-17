@@ -57,7 +57,7 @@ public class NoticeService {
         Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "noticeId");
         noticeSummaryDTOS = new ArrayList<>();
         for(NoticeSummary noticeSummary : noticeRepository.findAllByPined(false, pageable)){
-            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
+            String nickname = restTemplate.getForObject("http://10.178.0.3:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
             noticeSummaryDTOS.add(NoticeSummaryDTO.builder()
                     .noticeId(noticeSummary.getNoticeId())
                     .title(noticeSummary.getTitle())
