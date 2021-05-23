@@ -1,7 +1,10 @@
 package rev.team.POINT_SERVICE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rev.team.POINT_SERVICE.domain.request.PointReasonRequest;
 import rev.team.POINT_SERVICE.domain.entity.PointReason;
 import rev.team.POINT_SERVICE.domain.entity.PointRecord;
@@ -14,19 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PointService {
+public class PointReasonService {
 
     PointReasonRepository pointReasonRepository;
     PointRecordRepository pointRecordRepository;
 
     @Autowired
-    public PointService(PointReasonRepository pointReasonRepository, PointRecordRepository pointRecordRepository) {
+    public PointReasonService(PointReasonRepository pointReasonRepository, PointRecordRepository pointRecordRepository) {
         this.pointReasonRepository = pointReasonRepository;
         this.pointRecordRepository = pointRecordRepository;
     }
 
-    public List<PointReason> getPointReason() {
-        List<PointReason> pointReasons = pointReasonRepository.findAll();
+    @Transactional
+    public List<PointReason> getPointReason(Pageable pageable) {
+        Page<PointReason> pointReasons = pointReasonRepository.findAll(pageable);
         List<PointReason> pointReasonList = new ArrayList<>();
 
         for (PointReason pointReason : pointReasons) {
@@ -35,6 +39,7 @@ public class PointService {
                     .point(pointReason.getPoint())
                     .reason(pointReason.getReason())
                     .build();
+
             pointReasonList.add(reason);
         }
         return pointReasonList;
@@ -51,24 +56,6 @@ public class PointService {
     public String update(Long id, PointReasonRequest pointReasonRequest) {
         pointReasonRepository.updateById(id, pointReasonRequest.getReason(), pointReasonRequest.getPoint());
         return "UPDATE SUCCESS";
-    }
-
-    public String record(PointRecordRequest pointRecordRequest) {
-
-        // 포인트 사유 아이디에 해당하는 튜플 가져오기
-        PointReason reason = pointReasonRepository.findByPointReasonId(pointRecordRequest.getReasonId());
-
-        // 사용자 누적 포인트 변경
-        pointRecordRepository.updateUserPointById(pointRecordRequest.getUserId(), reason.getPoint());
-
-        // 포인트 기록 테이블에 저장
-        pointRecordRepository.save(PointRecord.builder()
-                .userId(pointRecordRequest.getUserId())
-                .pointReasonId(reason)
-                .pointDate(LocalDateTime.now())
-                .build());
-
-        return "RECORD SUCCESS";
     }
 
 }
