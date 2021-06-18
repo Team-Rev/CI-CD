@@ -1,4 +1,4 @@
-package rev.team.BOARD_SERVICE.domain.entity;
+package rev.team.BOARD_SERVICE.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

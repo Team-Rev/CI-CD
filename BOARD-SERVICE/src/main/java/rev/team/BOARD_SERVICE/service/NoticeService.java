@@ -4,7 +4,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSetUpDTO;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSummaryDTO;
 import rev.team.BOARD_SERVICE.domain.dto.PageNoticeSummaryDTO;
@@ -21,11 +20,11 @@ import java.util.Optional;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
     private List<NoticeSummaryDTO> noticeSummaryDTOS;
     public NoticeService(NoticeRepository noticeRepository) {
         this.noticeRepository = noticeRepository;
-        restTemplate = new RestTemplate();
+//        restTemplate = new RestTemplate();
     }
 
     //처음 공지사항 로딩 데이터
@@ -40,13 +39,13 @@ public class NoticeService {
     public List<NoticeSummaryDTO> getPinedNoticeSummaries() {
         noticeSummaryDTOS= new ArrayList<>();
         for(NoticeSummary noticeSummary : noticeRepository.findAllByPined(true, Sort.by(Sort.Direction.DESC, "noticeId"))){
-            String nickname = restTemplate.getForObject("http://10.178.0.3:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
+//            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
             noticeSummaryDTOS.add(NoticeSummaryDTO.builder()
                     .noticeId(noticeSummary.getNoticeId())
                     .title(noticeSummary.getTitle())
                     .postDate(noticeSummary.getPostDate())
                     .hits(noticeSummary.getHits())
-                    .nickname(nickname)
+                    .nickname("관리자")
                     .build());
         }
         return noticeSummaryDTOS;
@@ -57,13 +56,13 @@ public class NoticeService {
         Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "noticeId");
         noticeSummaryDTOS = new ArrayList<>();
         for(NoticeSummary noticeSummary : noticeRepository.findAllByPined(false, pageable)){
-            String nickname = restTemplate.getForObject("http://10.178.0.3:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
+//            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+noticeSummary.getUserId() ,String.class);
             noticeSummaryDTOS.add(NoticeSummaryDTO.builder()
                     .noticeId(noticeSummary.getNoticeId())
                     .title(noticeSummary.getTitle())
                     .postDate(noticeSummary.getPostDate())
                     .hits(noticeSummary.getHits())
-                    .nickname(nickname)
+                    .nickname("관리자")
                     .build());
         }
         return PageNoticeSummaryDTO.builder()

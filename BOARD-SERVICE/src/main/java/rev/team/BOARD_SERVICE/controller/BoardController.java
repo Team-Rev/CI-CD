@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rev.team.BOARD_SERVICE.domain.entity.Board;
-import rev.team.BOARD_SERVICE.domain.entity.BoardDTO;
+import rev.team.BOARD_SERVICE.domain.dto.BoardDTO;
 import rev.team.BOARD_SERVICE.service.BoardService;
 
 import java.util.List;

@@ -6,9 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import rev.team.BOARD_SERVICE.domain.entity.Board;
-import rev.team.BOARD_SERVICE.domain.entity.BoardDTO;
+import rev.team.BOARD_SERVICE.domain.dto.BoardDTO;
 import rev.team.BOARD_SERVICE.domain.repository.BoardRepository;
 import rev.team.BOARD_SERVICE.util.Category;
 
@@ -51,17 +50,17 @@ public class BoardService {
 
     public List<BoardDTO> getMainPosts() {
         Pageable pageable = PageRequest.of(0, 10, Sort.Direction.DESC, "boardId");
-        RestTemplate restTemplate = new RestTemplate();
+//        RestTemplate restTemplate = new RestTemplate();
 
         List<BoardDTO> boardDTOs= new ArrayList<>();
         for(Board board : boardRepository.findAllByStatusAndCategory(1, Category.Announcement ,pageable)){
-            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+board.getUserId() ,String.class);
+//            String nickname = restTemplate.getForObject("http://localhost:8760/nickname?id="+board.getUserId() ,String.class);
             boardDTOs.add(BoardDTO.builder()
                     .boardId(board.getBoardId())
                     .category(board.getCategory())
                     .content(board.getContent())
                     .hits(board.getHits())
-                    .nickname(nickname)
+                    .nickname("관리자")
                     .postDate(board.getPostDate())
                     .title(board.getTitle())
                     .status(board.getStatus())
