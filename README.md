@@ -4,7 +4,8 @@
 
 
 ## 설계 구조
-<img width="80%" alt="서버_CI_CD_구조" src="https://user-images.githubusercontent.com/46162801/123542610-8102d200-d785-11eb-9d96-5393274d0ce8.png">
+<img width="100%" alt="서버_CI_CD_구조" src="https://user-images.githubusercontent.com/46162801/123542610-8102d200-d785-11eb-9d96-5393274d0ce8.png"/>
+
 + AWS EC2: CI 서버
 + Google Cloud Platform VM: CD 서버
 + GitHub: 코드 push
