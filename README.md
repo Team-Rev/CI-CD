@@ -63,5 +63,5 @@ echo "[DOCKER RUN]"
 docker run -d --name one-pass -p 1111:1111 eunsilson/one-pass:latest
 ```
 
-
-## Database: AWS RDS (MariaDB)
+### Docker Hub
+<img width="80%" alt="docker hub" src="https://user-images.githubusercontent.com/46162801/123542665-d7701080-d785-11eb-99bc-bb5a7013f81a.PNG" />
