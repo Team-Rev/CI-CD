@@ -1,9 +1,9 @@
 
-# 프로젝트 소개
+## 프로젝트 소개
 + GitHub 링크: https://github.com/Team-Rev/MSA-SERVER
 
 
-# 설계 구조
+## 설계 구조
 + AWS EC2: CI 서버
 + Google Cloud Platform VM: CD 서버
 + GitHub: 코드 push
