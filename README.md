@@ -31,7 +31,7 @@ echo "[BUILD IMAGE]"
 docker build --tag eunsilson/one-pass:latest .
 
 echo "[DOCKER PUSH]"
-docker login -u eunsilson -p Flower1401!
+docker login -u username -p password
 docker push eunsilson/one-pass:latest
 
 echo "[SSH SCRIPTS START]"
