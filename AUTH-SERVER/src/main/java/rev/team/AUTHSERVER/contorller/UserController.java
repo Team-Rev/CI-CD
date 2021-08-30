@@ -2,6 +2,9 @@ package rev.team.AUTHSERVER.contorller;
 
 import org.springframework.web.bind.annotation.*;
 import rev.team.AUTHSERVER.domain.RevUser;
+import rev.team.AUTHSERVER.domain.request.FindIdReq;
+import rev.team.AUTHSERVER.domain.request.FindPwReq;
+import rev.team.AUTHSERVER.domain.request.NewPwReq;
 import rev.team.AUTHSERVER.service.UserService;
 
 @RestController
@@ -22,6 +25,19 @@ public class UserController {
     public String signUp(@RequestBody RevUser user){
         return userService.save(user);
     }
+
+    @GetMapping("/findId")
+    public String findId(@RequestBody FindIdReq findIdReq) {
+        return userService.findId(findIdReq);
+    }
+
+    @GetMapping("/findPw")
+    public String findPw(@RequestBody FindPwReq findPwReq) {
+        return userService.findPw(findPwReq);
+    }
+
+    @GetMapping("changePw")
+    public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
 
     @GetMapping("/nickname")
     public String getNickname(@RequestParam String username){
