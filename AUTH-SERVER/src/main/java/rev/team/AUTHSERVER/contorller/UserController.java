@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/findId")
-    public String findId(@RequestBody FindIdReq findIdReq) {
-        return userService.findId(findIdReq);
+    public RevUser findId(@RequestBody FindIdReq findIdReq) {
+        return userService.findId(findIdReq).orElseThrow(RuntimeException::new);
     }
 
     @GetMapping("/findPw")
@@ -36,7 +36,7 @@ public class UserController {
         return userService.findPw(findPwReq);
     }
 
-    @GetMapping("changePw")
+    @PostMapping("changePw")
     public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
 
     @GetMapping("/nickname")
