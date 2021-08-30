@@ -66,8 +66,14 @@ public class UserService {
         });
     }
 
-    public Optional<RevUser> findId(FindIdReq findIdReq) {
-        return userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
+    public String findId(FindIdReq findIdReq) {
+        String username = userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
+
+        if (username.isEmpty()) {
+            return "Not Existed User";
+        } else {
+            return username;
+        }
     }
 
     public String findPw(FindPwReq findPwReq) {

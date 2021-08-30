@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/findId")
-    public RevUser findId(@RequestBody FindIdReq findIdReq) {
-        return userService.findId(findIdReq).orElseThrow(RuntimeException::new);
+    public String findId(@RequestBody FindIdReq findIdReq) {
+        return userService.findId(findIdReq);
     }
 
     @GetMapping("/findPw")
