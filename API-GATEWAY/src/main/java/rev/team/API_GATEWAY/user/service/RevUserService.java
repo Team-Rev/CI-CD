@@ -13,11 +13,12 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class RevUserService implements UserDetailsService {
-    private final static String AUTH_SERVER = "10.178.0.2";
+    private final static String AUTH_SERVER = "localhost";
 
     private String getURL(){
         return "http://" + AUTH_SERVER + ":8775";
     }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         RestTemplate api = new RestTemplate();
