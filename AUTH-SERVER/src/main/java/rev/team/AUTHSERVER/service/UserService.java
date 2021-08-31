@@ -3,6 +3,9 @@ package rev.team.AUTHSERVER.service;
 import org.springframework.stereotype.Service;
 import rev.team.AUTHSERVER.domain.RevAuthority;
 import rev.team.AUTHSERVER.domain.RevUser;
+import rev.team.AUTHSERVER.domain.request.FindIdReq;
+import rev.team.AUTHSERVER.domain.request.FindPwReq;
+import rev.team.AUTHSERVER.domain.request.NewPwReq;
 import rev.team.AUTHSERVER.repository.RevUserRepository;
 
 import java.util.HashSet;
@@ -61,5 +64,28 @@ public class UserService {
                 save(user);
             }
         });
+    }
+
+    public String findId(FindIdReq findIdReq) {
+        String username = userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
+
+        if (username.isEmpty()) {
+            return "Not Existed User";
+        } else {
+            return username;
+        }
+    }
+
+    public String findPw(FindPwReq findPwReq) {
+        if (userRepository.findPw(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone())) {
+            return "SUCCESS";
+        } else {
+            return "FAIL";
+        }
+    }
+
+    public String changePw(NewPwReq newPwReq) {
+        userRepository.changePw(newPwReq.getUserId(), newPwReq.getPassword());
+        return "SUCCESS";
     }
 }
