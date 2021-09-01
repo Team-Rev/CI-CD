@@ -10,6 +10,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests().antMatchers("**", "/find**").permitAll();
+                .authorizeRequests().antMatchers("/findId").permitAll();
     }
 }
