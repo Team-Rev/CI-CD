@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/findId")
-    public String findId(@RequestBody FindIdReq findIdReq) {
-        return userService.findId(findIdReq);
+    public String findId(@RequestParam String name, @RequestParam String phone) {
+        return userService.findId(name, phone);
     }
 
     @GetMapping("/findPw")

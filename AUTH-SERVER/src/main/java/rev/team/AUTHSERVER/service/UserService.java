@@ -66,8 +66,8 @@ public class UserService {
         });
     }
 
-    public String findId(FindIdReq findIdReq) {
-        String username = userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
+    public String findId(String name, String phone) {
+        String username = userRepository.findUserId(name, phone);
 
         if (username.isEmpty()) {
             return "Not Existed User";
