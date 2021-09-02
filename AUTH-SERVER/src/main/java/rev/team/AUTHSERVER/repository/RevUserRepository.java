@@ -18,7 +18,7 @@ public interface RevUserRepository extends JpaRepository<RevUser, String> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE RevUser u SET u.password = :newPassword WHERE u.userId = :userId")
-    Optional<RevUser> updatePwByUserId(String userId, String newPassword);
+    int updatePwByUserId(String userId, String newPassword);
 
 
 }
