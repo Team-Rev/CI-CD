@@ -8,6 +8,7 @@ import rev.team.AUTHSERVER.domain.request.FindPwReq;
 import rev.team.AUTHSERVER.domain.request.NewPwReq;
 import rev.team.AUTHSERVER.repository.RevUserRepository;
 
+import javax.swing.text.html.Option;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,7 +76,12 @@ public class UserService {
     }
 
     public String changeNewPw(NewPwReq newPwReq) {
-        userRepository.updateById(newPwReq.getUserId(), newPwReq.getNewPassword());
+        Optional<RevUser> revUser = userRepository.findById(newPwReq.getUserId());
+        RevUser user = revUser.get();
+
+        user.setPassword(newPwReq.getNewPassword());
+        userRepository.save(user);
+
         return "SUCCESS";
     }
 }
