@@ -38,8 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/findId")
-    public String findId(@RequestBody FindIdReq findIdReq) throws UserNotFoundException {
-        return userService.findId(findIdReq).orElseThrow(UserNotFoundException::new).getUsername();
+    public String findId(@RequestBody FindIdReq findIdReq) {
+        return userService.findId(findIdReq);
     }
 
     @PostMapping("/findPw")

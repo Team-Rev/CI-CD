@@ -1,7 +1,9 @@
 package rev.team.AUTHSERVER.exception;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
-@ResponseStatus
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class UserNotFoundException extends Exception{
     public UserNotFoundException() {
         super("user not found");
