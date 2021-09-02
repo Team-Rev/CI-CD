@@ -74,8 +74,8 @@ public class UserService {
         return userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
     }
 
-    //public Optional<RevUser> changePw(NewPwReq newPwReq) {
-    //    return userRepository.saveByUserId(newPwReq.getUserId(), newPwReq.getPassword());
-    //}
+    public Optional<RevUser> changeNewPw(NewPwReq newPwReq) {
+        return userRepository.updatePwByUserId(newPwReq.getUserId(), newPwReq.getPassword());
+    }
 
 }
