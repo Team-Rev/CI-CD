@@ -75,7 +75,10 @@ public class UserService {
         return userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
     }
 
-    public Optional<RevUser> changeNewPw(NewPwReq newPwReq) {
-        return userRepository.updateById(newPwReq.getUserId(), newPwReq.getNewPassword());
+    public String changeNewPw(NewPwReq newPwReq) {
+        if (userRepository.updateById(newPwReq.getUserId(), newPwReq.getNewPassword()) == 1) {
+            return "UPDATE SUCCESS";
+        }
+        return "UPDATE FAIL";
     }
 }

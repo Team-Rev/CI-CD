@@ -48,5 +48,6 @@ public class UserController {
     }
 
     @PatchMapping("/changeNewPw")
-    public String changeNewPw(@RequestBody NewPwReq newPwReq) { return userService.changeNewPw(newPwReq).orElseThrow(RuntimeException::new).getUsername(); }
+    public String changeNewPw(@RequestBody NewPwReq newPwReq) {
+        return userService.changeNewPw(newPwReq); }
 }
