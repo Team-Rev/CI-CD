@@ -36,16 +36,16 @@ public class UserController {
         return userService.findUser(username).orElseThrow(RuntimeException::new).getPoint();
     }
 
-    @GetMapping("/findId")
+    @PostMapping("/findId")
     public String findId(@RequestBody FindIdReq findIdReq) {
         return userService.findId(findIdReq).orElseThrow(RuntimeException::new).getUsername();
     }
 
-    @GetMapping("/findPw")
+    @PostMapping("/findPw")
     public String findPw(@RequestBody FindPwReq findPwReq) {
         return userService.findPw(findPwReq).orElseThrow(RuntimeException::new).getUsername();
     }
 
-    @PostMapping("/changeNewPw")
+    @PatchMapping("/changeNewPw")
     public String changeNewPw(@RequestBody NewPwReq newPwReq) { return userService.changeNewPw(newPwReq).orElseThrow(RuntimeException::new).getUsername(); }
 }
