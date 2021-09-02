@@ -15,7 +15,7 @@ public interface RevUserRepository extends JpaRepository<RevUser, String> {
 
     Optional<RevUser> findRevUserByNameAndUserIdAndPhone(String name, String userId, String phone);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
     @Query(value = "UPDATE rev_user" + " SET password = :newPassword " + " WHERE (userId = :userId)", nativeQuery = true)
     void updateById(String userId, String newPassword);
