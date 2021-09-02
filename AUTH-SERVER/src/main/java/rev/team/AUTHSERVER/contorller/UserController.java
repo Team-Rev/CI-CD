@@ -47,5 +47,5 @@ public class UserController {
     }
 
     @PostMapping("/changeNewPw")
-    public String changeNewPw(@RequestBody NewPwReq newPwReq) { return userService.changeNewPw(newPwReq); }
+    public String changeNewPw(@RequestBody NewPwReq newPwReq) { return userService.changeNewPw(newPwReq).orElseThrow(RuntimeException::new).getUsername(); }
 }

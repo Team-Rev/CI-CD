@@ -75,13 +75,7 @@ public class UserService {
         return userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
     }
 
-    public String changeNewPw(NewPwReq newPwReq) {
-        Optional<RevUser> revUser = userRepository.findById(newPwReq.getUserId());
-        RevUser user = revUser.get();
-
-        user.setPassword(newPwReq.getNewPassword());
-        userRepository.save(user);
-
-        return "SUCCESS";
+    public Optional<RevUser> changeNewPw(NewPwReq newPwReq) {
+        return userRepository.updateById(newPwReq.getUserId(), newPwReq.getNewPassword());
     }
 }
