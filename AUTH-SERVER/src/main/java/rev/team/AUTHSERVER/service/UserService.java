@@ -71,14 +71,20 @@ public class UserService {
         Optional<RevUser> revUser = userRepository.findUserIdByNameAndPhone(findIdReq.getName(), findIdReq.getPhone());
 
         if (revUser.isEmpty()) {
-            return "user not found";
+            return "USER NOT FOUND";
         } else {
             return revUser.get().getUsername();
         }
     }
 
-    public Optional<RevUser> findPw(FindPwReq findPwReq) {
-        return userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
+    public String findPw(FindPwReq findPwReq) {
+        Optional<RevUser> revUser = userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
+
+        if (revUser.isEmpty()) {
+            return "USER NOT FOUND";
+        } else {
+            return "OK";
+        }
     }
 
     public String changeNewPw(NewPwReq newPwReq) {

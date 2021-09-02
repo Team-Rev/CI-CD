@@ -5,7 +5,6 @@ import rev.team.AUTHSERVER.domain.RevUser;
 import rev.team.AUTHSERVER.domain.request.FindIdReq;
 import rev.team.AUTHSERVER.domain.request.FindPwReq;
 import rev.team.AUTHSERVER.domain.request.NewPwReq;
-import rev.team.AUTHSERVER.exception.UserNotFoundException;
 import rev.team.AUTHSERVER.service.UserService;
 
 @RestController
@@ -44,7 +43,7 @@ public class UserController {
 
     @PostMapping("/findPw")
     public String findPw(@RequestBody FindPwReq findPwReq) {
-        return userService.findPw(findPwReq).orElseThrow(RuntimeException::new).getUsername();
+        return userService.findPw(findPwReq);
     }
 
     @PatchMapping("/changeNewPw")
