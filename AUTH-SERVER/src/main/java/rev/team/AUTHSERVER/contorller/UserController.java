@@ -48,4 +48,9 @@ public class UserController {
 
     @PostMapping("/changePw")
     public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
+
+    @GetMapping("/controllerTest")
+    public String test() {
+        return "되나?";
+    }
 }
