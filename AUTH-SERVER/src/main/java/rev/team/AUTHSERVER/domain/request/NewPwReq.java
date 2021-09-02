@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class NewPwReq {
     private String userId;
-    private String password;
+    private String newPassword;
 }

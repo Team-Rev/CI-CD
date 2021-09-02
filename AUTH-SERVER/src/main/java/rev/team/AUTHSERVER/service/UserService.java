@@ -75,7 +75,7 @@ public class UserService {
     }
 
     public Optional<RevUser> changeNewPw(NewPwReq newPwReq) {
-        return userRepository.updatePwByUserId(newPwReq.getUserId(), newPwReq.getPassword());
+        return userRepository.updatePwByUserId(newPwReq.getUserId(), newPwReq.getNewPassword());
     }
 
 }
