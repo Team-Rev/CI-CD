@@ -75,7 +75,7 @@ public class UserService {
     }
 
     public String changeNewPw(NewPwReq newPwReq) {
-        if(userRepository.updatePwByUserId(newPwReq.getUserId(), newPwReq.getNewPassword())) {
+        if(userRepository.updatePwByUserId(newPwReq.getUserId(), newPwReq.getNewPassword()) == 1) {
             return "SUCCESS";
         } else {
             return "FAIL";
