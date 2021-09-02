@@ -46,6 +46,6 @@ public class UserController {
         return userService.findPw(findPwReq);
     }
 
-    @PostMapping("changePw")
+    @PostMapping("/changePw")
     public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
 }
