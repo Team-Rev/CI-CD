@@ -11,8 +11,8 @@ import java.util.Optional;
 public interface RevUserRepository extends JpaRepository<RevUser, String> {
     Optional<RevUser> findRevUserByUserId(String id);
 
-    @Query(value = "SELECT userId FROM rev_user WHERE (name = :name AND phone = :phone)", nativeQuery = true)
-    String findUserId(String name, String phone);
+    @Query(value = "SELECT userId FROM rev_user WHERE (name = :name)", nativeQuery = true)
+    String findUserId(String name);
 
     @Query(value = "SELECT * FROM rev_user WHERE (name = :name AND userId = :userId AND phone = :phone)", nativeQuery = true)
     boolean findPw(String name, String userId, String phone);

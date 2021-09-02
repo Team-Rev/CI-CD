@@ -66,15 +66,15 @@ public class UserService {
         });
     }
 
-    public String findId(String name, String phone) {
-        String username = userRepository.findUserId(name, phone);
+    /*public String findId(FindIdReq findIdReq) {
+        String username = userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
 
         if (username.isEmpty()) {
             return "Not Existed User";
         } else {
             return username;
         }
-    }
+    }*/
 
     public String findPw(FindPwReq findPwReq) {
         if (userRepository.findPw(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone())) {
@@ -87,5 +87,9 @@ public class UserService {
     public String changePw(NewPwReq newPwReq) {
         userRepository.changePw(newPwReq.getUserId(), newPwReq.getPassword());
         return "SUCCESS";
+    }
+
+    public String test(String s) {
+        return userRepository.findUserId(s);
     }
 }

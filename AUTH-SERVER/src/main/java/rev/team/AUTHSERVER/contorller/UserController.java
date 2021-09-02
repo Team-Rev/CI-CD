@@ -36,12 +36,12 @@ public class UserController {
         return userService.findUser(username).orElseThrow(RuntimeException::new).getPoint();
     }
 
-    @GetMapping("/test1")
-    public String findId(@RequestParam String name, @RequestParam String phone) {
-        return userService.findId(name, phone);
-    }
+    /*@GetMapping("/findId")
+    public String findId(@RequestBody FindIdReq findIdReq) {
+        return userService.findId(findIdReq);
+    }*/
 
-    @GetMapping("/test2")
+    @GetMapping("/findPw")
     public String findPw(@RequestBody FindPwReq findPwReq) {
         return userService.findPw(findPwReq);
     }
@@ -49,8 +49,6 @@ public class UserController {
     @PostMapping("/changePw")
     public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
 
-    @GetMapping("/controllerTest")
-    public String test() {
-        return "되나?";
-    }
+    @GetMapping("/test")
+    public String test(@RequestParam String s) { return userService.test(s); }
 }
