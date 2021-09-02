@@ -36,12 +36,12 @@ public class UserController {
         return userService.findUser(username).orElseThrow(RuntimeException::new).getPoint();
     }
 
-    @GetMapping("/findId")
+    @GetMapping("/test1")
     public String findId(@RequestParam String name, @RequestParam String phone) {
         return userService.findId(name, phone);
     }
 
-    @GetMapping("/findPw")
+    @GetMapping("/test2")
     public String findPw(@RequestBody FindPwReq findPwReq) {
         return userService.findPw(findPwReq);
     }
