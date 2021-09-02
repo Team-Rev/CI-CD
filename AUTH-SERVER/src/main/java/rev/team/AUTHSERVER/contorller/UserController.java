@@ -5,6 +5,7 @@ import rev.team.AUTHSERVER.domain.RevUser;
 import rev.team.AUTHSERVER.domain.request.FindIdReq;
 import rev.team.AUTHSERVER.domain.request.FindPwReq;
 import rev.team.AUTHSERVER.domain.request.NewPwReq;
+import rev.team.AUTHSERVER.exception.UserNotFoundException;
 import rev.team.AUTHSERVER.service.UserService;
 
 @RestController
@@ -37,8 +38,8 @@ public class UserController {
     }
 
     @PostMapping("/findId")
-    public String findId(@RequestBody FindIdReq findIdReq) {
-        return userService.findId(findIdReq).orElseThrow(RuntimeException::new).getUsername();
+    public String findId(@RequestBody FindIdReq findIdReq) throws UserNotFoundException {
+        return userService.findId(findIdReq).orElseThrow(UserNotFoundException::new).getUsername();
     }
 
     @PostMapping("/findPw")
