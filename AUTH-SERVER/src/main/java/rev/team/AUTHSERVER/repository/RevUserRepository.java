@@ -11,16 +11,16 @@ import java.util.Optional;
 public interface RevUserRepository extends JpaRepository<RevUser, String> {
     Optional<RevUser> findRevUserByUserId(String id);
 
-    //@Query(value = "SELECT userId FROM rev_user WHERE (name = :name AND phone = :phone)", nativeQuery = true)
-    //String findUserId(String name, String phone);
-
     Optional<RevUser> findUserIdByNameAndPhone(String name, String phone);
 
-    @Query(value = "SELECT * FROM rev_user WHERE (name = :name AND userId = :userId AND phone = :phone)", nativeQuery = true)
-    boolean findPw(String name, String userId, String phone);
+    Optional<RevUser> findUserForPwBySomeInfo(String name, String userId, String phone);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE rev_user SET password = :password WHERE (userId = :userId);", nativeQuery = true)
     void changePw(String userId, String password);
+
+    Optional<RevUser> saveNewPwByUserId(String userId, String pw);
+
+
 }

@@ -43,9 +43,9 @@ public class UserController {
 
     @GetMapping("/findPw")
     public String findPw(@RequestBody FindPwReq findPwReq) {
-        return userService.findPw(findPwReq);
+        return userService.findPw(findPwReq).orElseThrow(RuntimeException::new).getUsername();
     }
 
     @PostMapping("/changePw")
-    public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq); }
+    public String changePw(@RequestBody NewPwReq newPwReq) { return userService.changePw(newPwReq).orElseThrow(RuntimeException::new).getUsername(); }
 }

@@ -70,17 +70,12 @@ public class UserService {
         return userRepository.findUserIdByNameAndPhone(findIdReq.getName(), findIdReq.getPhone());
     }
 
-    public String findPw(FindPwReq findPwReq) {
-        if (userRepository.findPw(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone())) {
-            return "SUCCESS";
-        } else {
-            return "FAIL";
-        }
+    public Optional<RevUser> findPw(FindPwReq findPwReq) {
+        return userRepository.findUserForPwBySomeInfo(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
     }
 
-    public String changePw(NewPwReq newPwReq) {
-        userRepository.changePw(newPwReq.getUserId(), newPwReq.getPassword());
-        return "SUCCESS";
+    public Optional<RevUser> changePw(NewPwReq newPwReq) {
+        return userRepository.saveNewPwByUserId(newPwReq.getUserId(), newPwReq.getPassword());
     }
 
 }
