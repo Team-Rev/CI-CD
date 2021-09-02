@@ -13,14 +13,14 @@ public interface RevUserRepository extends JpaRepository<RevUser, String> {
 
     Optional<RevUser> findUserIdByNameAndPhone(String name, String phone);
 
-    Optional<RevUser> findUserForPwBySomeInfo(String name, String userId, String phone);
+    Optional<RevUser> findRevUserByNameAndUserIdAndPhone(String name, String userId, String phone);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE rev_user SET password = :password WHERE (userId = :userId);", nativeQuery = true)
     void changePw(String userId, String password);
 
-    Optional<RevUser> saveNewPwByUserId(String userId, String pw);
+    //Optional<RevUser> saveByUserId(String userId, String pw);
 
 
 }

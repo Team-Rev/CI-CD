@@ -71,11 +71,11 @@ public class UserService {
     }
 
     public Optional<RevUser> findPw(FindPwReq findPwReq) {
-        return userRepository.findUserForPwBySomeInfo(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
+        return userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
     }
 
-    public Optional<RevUser> changePw(NewPwReq newPwReq) {
-        return userRepository.saveNewPwByUserId(newPwReq.getUserId(), newPwReq.getPassword());
-    }
+    //public Optional<RevUser> changePw(NewPwReq newPwReq) {
+    //    return userRepository.saveByUserId(newPwReq.getUserId(), newPwReq.getPassword());
+    //}
 
 }
