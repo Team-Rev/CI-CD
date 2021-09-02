@@ -67,7 +67,7 @@ public class UserService {
     }
 
     public Optional<RevUser> findId(FindIdReq findIdReq) {
-        return userRepository.findUserId(findIdReq.getName(), findIdReq.getPhone());
+        return userRepository.findUserIdByNameAndPhone(findIdReq.getName(), findIdReq.getPhone());
     }
 
     public String findPw(FindPwReq findPwReq) {
