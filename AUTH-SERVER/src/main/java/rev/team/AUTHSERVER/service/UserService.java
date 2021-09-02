@@ -75,16 +75,7 @@ public class UserService {
     }
 
     public String changeNewPw(NewPwReq newPwReq) {
-        Optional<RevUser> revUser = userRepository.findById(newPwReq.getUserId());
-
-        if (revUser.isPresent()) {
-            RevUser user = revUser.get();
-            user.setPassword(newPwReq.getNewPassword());
-            userRepository.save(user);
-            return "SUCCESS";
-        }
-
-        return "FAIL";
+        userRepository.updateById(newPwReq.getUserId(), newPwReq.getNewPassword());
+        return "SUCCESS";
     }
-
 }
