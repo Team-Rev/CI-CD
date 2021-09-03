@@ -87,13 +87,13 @@ public class UserService {
     }
 
     public String changeNewPw(UpdatePwReq updatePwReq) {
-        RevUser user = userRepository.findById(updatePwReq.getUserId()).get();
+        Optional<RevUser> revUser = userRepository.findById(updatePwReq.getUserId());
 
-        if (user.equals(null)) {
+        if (revUser.isEmpty()) {
             return "USER NOT FOUND";
         } else {
-            user.setPassword(updatePwReq.getNewPassword());
-            userRepository.save(user);
+            revUser.get().setPassword(updatePwReq.getNewPassword());
+            userRepository.save(revUser.get());
 
             return "UPDATE SUCCESS";
         }
