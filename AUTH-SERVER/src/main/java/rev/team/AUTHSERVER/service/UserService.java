@@ -77,7 +77,7 @@ public class UserService {
     }
 
     public String findPw(FindPwReq findPwReq) {
-        Optional<RevUser> revUser = userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUsername(), findPwReq.getPhone());
+        Optional<RevUser> revUser = userRepository.findRevUserByNameAndUserIdAndPhone(findPwReq.getName(), findPwReq.getUserId(), findPwReq.getPhone());
 
         if (revUser.isEmpty()) {
             return "USER NOT FOUND";
@@ -88,9 +88,14 @@ public class UserService {
 
     public String changeNewPw(UpdatePwReq updatePwReq) {
         RevUser user = userRepository.findById(updatePwReq.getUserId()).get();
-        user.setPassword(updatePwReq.getNewPassword());
-        userRepository.save(user);
 
-        return "UPDATE SUCCESS";
+        if (user == null) {
+            return "USER NOT FOUND";
+        } else {
+            user.setPassword(updatePwReq.getNewPassword());
+            userRepository.save(user);
+
+            return "UPDATE SUCCESS";
+        }
     }
 }
