@@ -89,7 +89,7 @@ public class UserService {
     public String changeNewPw(UpdatePwReq updatePwReq) {
         RevUser user = userRepository.findById(updatePwReq.getUserId()).get();
 
-        if (user == null) {
+        if (user.equals(null)) {
             return "USER NOT FOUND";
         } else {
             user.setPassword(updatePwReq.getNewPassword());
