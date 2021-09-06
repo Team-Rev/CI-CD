@@ -3,10 +3,12 @@ package rev.team.PROBLEM_SERVICE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import rev.team.PROBLEM_SERVICE.domain.dto.SubmitDTO;
 import rev.team.PROBLEM_SERVICE.domain.entity.*;
 import rev.team.PROBLEM_SERVICE.domain.repository.*;
 
+import java.net.http.HttpRequest;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -19,6 +21,9 @@ public class QuestionService {
     private final AnswerDetailRepository answerDetailRepository;
     private final AnswerChoiceRepository answerChoiceRepository;
     private final AnswerTotalRepository answerTotalRepository;
+
+    private final static String AUTH_SERVER = "34.64.245.232";
+
     @Autowired
     public QuestionService(QuestionRepository questionRepository
             , MultipleChoiceRepository multipleChoiceRepository
@@ -33,6 +38,10 @@ public class QuestionService {
         this.answerDetailRepository = answerDetailRepository;
         this.answerChoiceRepository = answerChoiceRepository;
         this.answerTotalRepository = answerTotalRepository;
+    }
+
+    private String getURL(){
+        return "http://34.64.245.232:8760";
     }
 
     //한 문제 가져오기
@@ -55,6 +64,9 @@ public class QuestionService {
     }
 
     public AnswerMain submitQuestions(SubmitDTO submit) {
+        RestTemplate api = new RestTemplate();
+        api.postForEntity(getURL() + "/point/record?reasonId=" + 1 + "&userId=" + submit.getUserId(), getURL(), String.class);
+
         Set<Submit> submits = submit.getSubmitList();
         Set<AnswerDetail> details = new HashSet<>();
 
