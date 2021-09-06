@@ -27,17 +27,17 @@ public class PointRecordService {
         this.pointRecordRepository = pointRecordRepository;
     }
 
-    public String record(PointRecordRequest pointRecordRequest) {
+    public String record(String userId, Long reasonId) {
 
         // 포인트 사유 아이디에 해당하는 튜플 가져오기
-        PointReason reason = pointReasonRepository.findByPointReasonId(pointRecordRequest.getReasonId());
+        PointReason reason = pointReasonRepository.findByPointReasonId(reasonId);
 
         // 사용자 누적 포인트 변경
-        pointRecordRepository.updateUserPointById(pointRecordRequest.getUserId(), reason.getPoint());
+        pointRecordRepository.updateUserPointById(userId, reason.getPoint());
 
         // 포인트 기록 테이블에 저장
         pointRecordRepository.save(PointRecord.builder()
-                .userId(pointRecordRequest.getUserId())
+                .userId(userId)
                 .pointReasonId(reason)
                 .pointDate(LocalDateTime.now())
                 .build());

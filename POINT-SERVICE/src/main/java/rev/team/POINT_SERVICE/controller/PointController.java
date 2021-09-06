@@ -43,8 +43,8 @@ public class PointController {
     }
 
     @PostMapping("/record")
-    public String recordPoint(@RequestBody PointRecordRequest pointRecordRequest) {
-        return pointRecordService.record(pointRecordRequest);
+    public String recordPoint(@RequestParam String userId, @RequestParam Long reasonId) {
+        return pointRecordService.record(userId, reasonId);
     }
 
     @GetMapping("/userRecord/{userId}")
