@@ -10,6 +10,7 @@ import rev.team.BOARD_SERVICE.domain.entity.Ask;
 import rev.team.BOARD_SERVICE.domain.repository.AskRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,5 +42,9 @@ public class AskService {
         askRepository.flush();
         Optional<Ask> askOptional= askRepository.findById(id);
         return askOptional.orElse(null);
+    }
+
+    public List<Ask> getAskOfFrequency() {
+        return askRepository.findAllDesc();
     }
 }

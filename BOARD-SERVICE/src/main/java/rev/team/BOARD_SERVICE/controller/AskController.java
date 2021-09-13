@@ -40,7 +40,7 @@ public class AskController {
     //TODO: GET FREQUENCY ASK. 많이 본 질문 6개(반정규화 해야됨)
     @GetMapping("/top")
     public List<Ask> getAskOfFrequency(){
-        return new ArrayList<>();
+        return askService.getAskOfFrequency();
     }
 
     //TODO: 작성

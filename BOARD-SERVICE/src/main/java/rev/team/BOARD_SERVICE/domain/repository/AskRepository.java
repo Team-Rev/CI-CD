@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import rev.team.BOARD_SERVICE.domain.entity.Ask;
 
+import java.util.List;
+
 @Repository
 public interface AskRepository extends JpaRepository<Ask, Long> {
     @Modifying
@@ -16,4 +18,7 @@ public interface AskRepository extends JpaRepository<Ask, Long> {
     @Modifying
     @Query(value = "UPDATE Ask SET comments = comments +1 WHERE askId = :id")
     void updateReComments(@Param("id")Long id);
+
+    @Query(value = "SELECT * FROM ask ORDER BY hits DESC LIMIT 6;", nativeQuery = true)
+    List<Ask> findAllDesc();
 }
