@@ -32,6 +32,7 @@ public class CommentController {
     public List<Comment> getComments(@RequestParam("askId") Long askId, @RequestParam("page") Integer page){
         return commentService.getComments(askId, page);
     }
+
     //TODO : 수정
     //TODO : 삭제
 }

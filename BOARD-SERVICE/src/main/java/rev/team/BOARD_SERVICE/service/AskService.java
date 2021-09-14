@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import rev.team.BOARD_SERVICE.domain.dto.AskPageDTO;
 import rev.team.BOARD_SERVICE.domain.entity.Ask;
 import rev.team.BOARD_SERVICE.domain.repository.AskRepository;
+import rev.team.BOARD_SERVICE.domain.request.AskUpdateReq;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -32,10 +33,6 @@ public class AskService {
                 .build();
     }
 
-    public void createAsk(Ask ask) {
-        askRepository.save(ask);
-    }
-
     @Transactional
     public Ask getAsk(Long id) {
         askRepository.hits(id);
@@ -46,5 +43,26 @@ public class AskService {
 
     public List<Ask> getAskOfFrequency() {
         return askRepository.findAllDesc();
+    }
+
+    public String createAsk(Ask ask) {
+        askRepository.save(ask);
+
+        return "SUCCESS";
+    }
+
+    public String updateAsk(AskUpdateReq askUpdateReq) {
+        Ask ask = askRepository.findById(askUpdateReq.getAskId()).get();
+
+        ask.setTitle(askUpdateReq.getTitle());
+        ask.setContent(askUpdateReq.getContent());
+        askRepository.save(ask);
+
+        return "SUCCESS";
+    }
+
+    public String deleteAsk(Long askId) {
+        askRepository.deleteById(askId);
+        return "SUCCESS";
     }
 }

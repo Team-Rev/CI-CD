@@ -25,10 +25,14 @@ public class CommentService {
 
     @Transactional
     public Comment create(Comment comment) {
+        comment.setCommentId(commentRepository.count() + 1);
 
-        comment.setCommentId(commentRepository.count()+1);
-        if(comment.getRefComment() == null) comment.setRefComment(comment.getCommentId());
+        if(comment.getRefComment() == null) {
+            comment.setRefComment(comment.getCommentId());
+        }
+
         askRepository.updateReComments(comment.getRefAsk());
+
         return commentRepository.save(comment);
     }
 
