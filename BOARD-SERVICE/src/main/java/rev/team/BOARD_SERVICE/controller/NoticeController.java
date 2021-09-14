@@ -1,12 +1,13 @@
 package rev.team.BOARD_SERVICE.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSetUpDTO;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSummaryDTO;
 import rev.team.BOARD_SERVICE.domain.dto.PageNoticeSummaryDTO;
+import rev.team.BOARD_SERVICE.domain.entity.Board;
+import rev.team.BOARD_SERVICE.domain.entity.Notice;
 import rev.team.BOARD_SERVICE.service.NoticeService;
 
 import java.util.List;
@@ -46,5 +47,23 @@ public class NoticeController {
     @GetMapping("/notice-content")
     public String getNoticeContent(@RequestParam("id") Long id){
         return noticeService.getNoticeContent(id);
+    }
+
+    // TODO : 작성
+    @PostMapping("/notice-create")
+    public ResponseEntity<Notice> createPost(@RequestBody Notice notice){
+        return ResponseEntity.ok(noticeService.save(notice));
+    }
+
+    // TODO : 수정
+    @PatchMapping("/notice-update")
+    public String updatePost(@RequestBody Notice notice){
+        return noticeService.updatePost(notice);
+    }
+
+    // TODO : 삭제
+    @DeleteMapping("/notice-delete")
+    public String deletePost(@RequestParam Long id){
+        return noticeService.deletePost(id);
     }
 }

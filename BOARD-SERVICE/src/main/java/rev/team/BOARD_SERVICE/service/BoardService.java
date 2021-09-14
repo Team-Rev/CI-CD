@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,3 +71,4 @@ public class BoardService {
         return boardDTOs;
     }
 }
+*/

@@ -36,6 +36,12 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
+    public String delete(Long commentId) {
+        commentRepository.deleteById(commentId);
+
+        return "SUCCESS";
+    }
+
     public List<Comment> getComments(Long askId, Integer page) {
         Pageable pageable = PageRequest.of(page, 10, Sort.Direction.DESC, "commentId");
         return commentRepository.findAllByRefAsk(askId, pageable);

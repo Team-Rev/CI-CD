@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.domain.dto;
 
 import lombok.AllArgsConstructor;
@@ -30,3 +31,4 @@ public class BoardDTO {
 
     private Integer status = 0;
 }
+*/

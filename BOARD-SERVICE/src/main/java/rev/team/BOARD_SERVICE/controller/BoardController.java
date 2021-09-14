@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,22 +36,20 @@ public class BoardController {
         return ResponseEntity.ok(boardService.save(board));
     }
 
-    @DeleteMapping("/post/{id}")
-    public String deletePost(@PathVariable("id") Long id){
-        return boardService.deletePost(id);
-    }
-
     @PatchMapping("/post/{id}")
     public String updatePost(@PathVariable("id") Long id, @RequestParam("title")String title){
         return boardService.updatePost(id, title);
     }
 
+    @DeleteMapping("/post/{id}")
+    public String deletePost(@PathVariable("id") Long id){
+        return boardService.deletePost(id);
+    }
+
     //TODO : 게시판 별로 테이블 나누기
     // 공지글(2021-05-12~ing, 김태영)
     // 질문글
-    // 문의글
-
 
     //TODO : 글 세부내역 조회하면 조회수올리면서 해당 아이디의 글 반환
-
 }
+*/

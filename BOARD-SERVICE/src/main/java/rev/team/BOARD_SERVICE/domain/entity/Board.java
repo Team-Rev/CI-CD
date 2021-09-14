@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.domain.entity;
 
 import lombok.AllArgsConstructor;
@@ -43,3 +44,4 @@ public class Board {
     @Column(columnDefinition = "integer default 0")
     private Integer status = 0;
 }
+*/

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSetUpDTO;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSummaryDTO;
 import rev.team.BOARD_SERVICE.domain.dto.PageNoticeSummaryDTO;
+import rev.team.BOARD_SERVICE.domain.entity.Board;
 import rev.team.BOARD_SERVICE.domain.entity.Notice;
 import rev.team.BOARD_SERVICE.domain.mapping.NoticeSummary;
 import rev.team.BOARD_SERVICE.domain.repository.NoticeRepository;
@@ -80,5 +81,26 @@ public class NoticeService {
             return notice.get().getContent();
         }
         return "NONE";
+    }
+
+    public Notice save(Notice notice) {
+        noticeRepository.save(notice);
+        return notice;
+    }
+
+    public String deletePost(Long id) {
+        noticeRepository.deleteById(id);
+        return "OK";
+    }
+
+    public String updatePost(Notice notice) {
+        Notice updateNotice = noticeRepository.findById(notice.getNoticeId()).get();
+
+        updateNotice.setTitle(notice.getTitle());
+        updateNotice.setContent(notice.getContent());
+
+        noticeRepository.save(updateNotice);
+
+        return "OK";
     }
 }

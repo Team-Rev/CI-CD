@@ -20,6 +20,12 @@ public class CommentController {
         this.commentService = commentService;
     }
 
+    //TODO : 조회(무한로딩 해야됨)
+    @GetMapping("")
+    public List<Comment> getComments(@RequestParam("askId") Long askId, @RequestParam("page") Integer page){
+        return commentService.getComments(askId, page);
+    }
+
     //TODO : 작성
     @PostMapping("")
     public ResponseEntity<Comment> create(@RequestBody Comment comment){
@@ -27,12 +33,9 @@ public class CommentController {
         return new ResponseEntity<>(newComment, HttpStatus.OK);
     }
 
-    //TODO : 조회(무한로딩 해야됨)
-    @GetMapping("")
-    public List<Comment> getComments(@RequestParam("askId") Long askId, @RequestParam("page") Integer page){
-        return commentService.getComments(askId, page);
-    }
-
-    //TODO : 수정
     //TODO : 삭제
+    @DeleteMapping("")
+    public String delete(@RequestBody Long commentId){
+        return commentService.delete(commentId);
+    }
 }

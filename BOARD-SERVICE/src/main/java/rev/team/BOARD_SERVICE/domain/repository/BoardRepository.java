@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.domain.repository;
 
 import org.springframework.data.domain.Page;
@@ -18,3 +19,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Page<Board> findAllByStatusAndCategory(Integer status, Category category, Pageable pageable);
 }
+*/
