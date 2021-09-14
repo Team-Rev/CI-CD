@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import rev.team.BOARD_SERVICE.domain.dto.AskPageDTO;
 import rev.team.BOARD_SERVICE.domain.entity.Ask;
 import rev.team.BOARD_SERVICE.domain.repository.AskRepository;
-import rev.team.BOARD_SERVICE.domain.request.AskUpdateReq;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -50,16 +49,6 @@ public class AskService {
 
         return "SUCCESS";
     }
-
-    /*public String updateAsk(AskUpdateReq askUpdateReq) {
-        Ask ask = askRepository.findById(askUpdateReq.getAskId()).get();
-
-        ask.setTitle(askUpdateReq.getTitle());
-        ask.setContent(askUpdateReq.getContent());
-        askRepository.save(ask);
-
-        return "SUCCESS";
-    }*/
 
     public String updateAsk(Ask ask) {
         Ask updateAsk = askRepository.findById(ask.getAskId()).get();
