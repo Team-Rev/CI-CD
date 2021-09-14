@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSetUpDTO;
 import rev.team.BOARD_SERVICE.domain.dto.NoticeSummaryDTO;
 import rev.team.BOARD_SERVICE.domain.dto.PageNoticeSummaryDTO;
-import rev.team.BOARD_SERVICE.domain.entity.Board;
 import rev.team.BOARD_SERVICE.domain.entity.Notice;
 import rev.team.BOARD_SERVICE.domain.mapping.NoticeSummary;
 import rev.team.BOARD_SERVICE.domain.repository.NoticeRepository;
