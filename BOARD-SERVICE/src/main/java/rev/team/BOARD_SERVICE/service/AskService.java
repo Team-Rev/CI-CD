@@ -51,12 +51,22 @@ public class AskService {
         return "SUCCESS";
     }
 
-    public String updateAsk(AskUpdateReq askUpdateReq) {
+    /*public String updateAsk(AskUpdateReq askUpdateReq) {
         Ask ask = askRepository.findById(askUpdateReq.getAskId()).get();
 
         ask.setTitle(askUpdateReq.getTitle());
         ask.setContent(askUpdateReq.getContent());
         askRepository.save(ask);
+
+        return "SUCCESS";
+    }*/
+
+    public String updateAsk(Ask ask) {
+        Ask updateAsk = askRepository.findById(ask.getAskId()).get();
+
+        updateAsk.setTitle(ask.getTitle());
+        updateAsk.setContent(ask.getContent());
+        askRepository.save(updateAsk);
 
         return "SUCCESS";
     }

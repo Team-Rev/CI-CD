@@ -47,8 +47,8 @@ public class AskController {
 
     //TODO: 수정
     @PatchMapping("")
-    public String updateAsk(@RequestBody AskUpdateReq askUpdateReq) {
-        return askService.updateAsk(askUpdateReq);
+    public String updateAsk(@RequestBody Ask ask) {
+        return askService.updateAsk(ask);
     }
 
     //TODO: 삭제
