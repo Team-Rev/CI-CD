@@ -1,14 +1,10 @@
 package rev.team.BOARD_SERVICE.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rev.team.BOARD_SERVICE.domain.dto.AskPageDTO;
 import rev.team.BOARD_SERVICE.domain.entity.Ask;
-import rev.team.BOARD_SERVICE.domain.entity.Comment;
-import rev.team.BOARD_SERVICE.domain.request.AskUpdateReq;
 import rev.team.BOARD_SERVICE.service.AskService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
