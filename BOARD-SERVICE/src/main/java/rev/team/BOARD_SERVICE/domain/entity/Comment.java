@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -17,7 +16,7 @@ import java.util.Date;
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
     private Long commentId;
 
     //작성자
@@ -27,7 +26,9 @@ public class Comment {
     private String nickname;
 
     //날짜
-    private LocalDateTime postDate;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date postDate;
 
     //댓글
     @Column(columnDefinition = "TEXT")
