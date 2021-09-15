@@ -17,8 +17,8 @@ public class UserController {
     }
 
     @GetMapping("/userInfo")
-    public RevUser getUser(@RequestParam("username") String username){
-        return userService.findUser(username).orElseThrow(RuntimeException::new);
+    public RevUser getUser(@RequestParam("userId") String username){
+        return userService.findUser(userId).orElseThrow(RuntimeException::new);
     }
 
     @PostMapping("/signup")
