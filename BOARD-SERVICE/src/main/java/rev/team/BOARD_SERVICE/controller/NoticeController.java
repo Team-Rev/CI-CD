@@ -48,19 +48,19 @@ public class NoticeController {
         return noticeService.getNoticeContent(id);
     }
 
-    // TODO : 작성
+    //작성
     @PostMapping("/notice")
     public ResponseEntity<Notice> createPost(@RequestBody Notice notice){
         return ResponseEntity.ok(noticeService.save(notice));
     }
 
-    // TODO : 수정
+    //수정
     @PatchMapping("/notice")
     public String updatePost(@RequestBody Notice notice){
         return noticeService.updatePost(notice);
     }
 
-    // TODO : 삭제
+    //삭제
     @DeleteMapping("/notice")
     public String deletePost(@RequestParam Long id){
         return noticeService.deletePost(id);

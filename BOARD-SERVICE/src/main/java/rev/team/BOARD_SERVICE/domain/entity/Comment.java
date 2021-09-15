@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -16,7 +17,7 @@ import java.util.Date;
 @Entity
 public class Comment {
     @Id
-    @Column(name = "comment_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
 
     //작성자
@@ -26,25 +27,23 @@ public class Comment {
     private String nickname;
 
     //날짜
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date postDate;
+    private LocalDateTime postDate;
 
     //댓글
     @Column(columnDefinition = "TEXT")
     private String comment;
 
     //대댓글
-    @Column(columnDefinition = "integer default 0")
-    private Integer reComment = 0;
+    //@Column(columnDefinition = "integer default 0")
+    //private Integer reComment = 0;
 
     //좋아용
-    @Column(columnDefinition = "integer default 0")
-    private Integer good = 0;
+    //@Column(columnDefinition = "integer default 0")
+    //private Integer good = 0;
 
     //참조 글
     private Long refAsk;
 
     //상위 댓글
-    private Long refComment;
+    //private Long refComment;
 }

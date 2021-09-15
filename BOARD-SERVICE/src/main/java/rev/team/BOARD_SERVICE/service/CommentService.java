@@ -1,5 +1,7 @@
 package rev.team.BOARD_SERVICE.service;
 
+import org.apache.tomcat.jni.Local;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -9,6 +11,8 @@ import rev.team.BOARD_SERVICE.domain.repository.AskRepository;
 import rev.team.BOARD_SERVICE.domain.repository.CommentRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,16 +28,17 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment create(Comment comment) {
-        comment.setCommentId(commentRepository.count() + 1);
-
-        if(comment.getRefComment() == null) {
-            comment.setRefComment(comment.getCommentId());
-        }
-
+    public String create(Comment comment) {
         askRepository.updateReComments(comment.getRefAsk());
 
-        return commentRepository.save(comment);
+        /*if(comment.getRefComment() == null) {
+            comment.setRefComment(comment.getCommentId());
+        }
+        comment.setCommentId(commentRepository.count() + 1);
+         */
+        commentRepository.save(comment);
+
+        return "OK";
     }
 
     public String delete(Long commentId) {
