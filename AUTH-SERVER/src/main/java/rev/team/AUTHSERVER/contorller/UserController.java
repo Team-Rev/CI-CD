@@ -27,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/nickname")
-    public String getNickname(@RequestParam String username){
-        return userService.findUser(username).orElseThrow(RuntimeException::new).getNickname();
+    public String getNickname(@RequestParam String userId){
+        return userService.findUser(userId).orElseThrow(RuntimeException::new).getNickname();
     }
 
     @GetMapping("/userPoint")
