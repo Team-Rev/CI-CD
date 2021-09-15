@@ -28,9 +28,8 @@ public class CommentController {
 
     //작성
     @PostMapping("")
-    public ResponseEntity<Comment> create(@RequestBody Comment comment){
-        Comment newComment = commentService.create(comment);
-        return new ResponseEntity<>(newComment, HttpStatus.OK);
+    public String create(@RequestBody Comment comment){
+        return commentService.create(comment);
     }
 
     //삭제

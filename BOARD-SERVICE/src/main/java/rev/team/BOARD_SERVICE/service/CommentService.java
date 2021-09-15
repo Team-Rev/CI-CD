@@ -9,6 +9,7 @@ import rev.team.BOARD_SERVICE.domain.repository.AskRepository;
 import rev.team.BOARD_SERVICE.domain.repository.CommentRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,16 +25,17 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment create(Comment comment) {
-        comment.setCommentId(commentRepository.count() + 1);
+    public String create(Comment comment) {
+        askRepository.updateReComments(comment.getRefAsk()); // 질문 글에 댓글 수 +1
 
-        if(comment.getRefComment() == null) {
-            comment.setRefComment(comment.getCommentId());
-        }
-
-        askRepository.updateReComments(comment.getRefAsk());
-
-        return commentRepository.save(comment);
+        commentRepository.save(Comment.builder()
+                .userId(comment.getUserId())
+                .nickname(comment.getNickname())
+                .comment(comment.getComment())
+                .postDate(LocalDateTime.now())
+                .refAsk(comment.getRefAsk())
+                .build());
+        return "OK";
     }
 
     public String delete(Long commentId) {
