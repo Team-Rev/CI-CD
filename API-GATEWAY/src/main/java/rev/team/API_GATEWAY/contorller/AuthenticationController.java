@@ -1,6 +1,7 @@
 package rev.team.API_GATEWAY.contorller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,13 +33,13 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception{
         try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUserId(), authenticationRequest.getPassword())
             );
-        }catch (Exception e){
-            return ResponseEntity.notFound().build();
+        }catch (BadCredentialsException e){
+            return new ResponseEntity<>("Incorrect username or password", HttpStatus.OK);
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserId());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
