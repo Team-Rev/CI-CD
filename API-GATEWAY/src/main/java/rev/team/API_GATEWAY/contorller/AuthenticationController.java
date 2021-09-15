@@ -38,15 +38,11 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         }catch (Exception e){
-            throw new Exception("Incorrect username or password", e);
+            return ResponseEntity.notFound().build();
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
         String nickname = userDetailsService.getNickname(authenticationRequest.getUsername());
         return ResponseEntity.ok(new AuthenticationResponse(jwt, nickname));
     }
-
-
-    //Refresh Token
-
 }
