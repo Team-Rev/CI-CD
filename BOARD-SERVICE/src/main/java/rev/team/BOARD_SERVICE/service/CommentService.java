@@ -34,8 +34,8 @@ public class CommentService {
         /*if(comment.getRefComment() == null) {
             comment.setRefComment(comment.getCommentId());
         }
+        */
         comment.setCommentId(commentRepository.count() + 1);
-         */
         commentRepository.save(comment);
 
         return "OK";
