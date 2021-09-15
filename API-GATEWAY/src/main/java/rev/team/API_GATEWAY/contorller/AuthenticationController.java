@@ -35,14 +35,14 @@ public class AuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws Exception{
         try{
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getUserId(), authenticationRequest.getPassword())
             );
         }catch (Exception e){
             return ResponseEntity.notFound().build();
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUserId());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        String nickname = userDetailsService.getNickname(authenticationRequest.getUsername());
+        String nickname = userDetailsService.getNickname(authenticationRequest.getUserId());
         return ResponseEntity.ok(new AuthenticationResponse(jwt, nickname));
     }
 }
