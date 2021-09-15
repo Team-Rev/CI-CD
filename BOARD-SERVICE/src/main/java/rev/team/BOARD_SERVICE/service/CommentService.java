@@ -28,17 +28,16 @@ public class CommentService {
     }
 
     @Transactional
-    public String create(Comment comment) {
-        askRepository.updateReComments(comment.getRefAsk());
+    public Comment create(Comment comment) {
+        comment.setCommentId(commentRepository.count() + 1);
 
-        /*if(comment.getRefComment() == null) {
+        if(comment.getRefComment() == null) {
             comment.setRefComment(comment.getCommentId());
         }
-        */
-        comment.setCommentId(commentRepository.count() + 1);
-        commentRepository.save(comment);
 
-        return "OK";
+        askRepository.updateReComments(comment.getRefAsk());
+
+        return commentRepository.save(comment);
     }
 
     public String delete(Long commentId) {
