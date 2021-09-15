@@ -16,7 +16,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/userInfo")
     public RevUser getUser(@RequestParam("username") String username){
         return userService.findUser(username).orElseThrow(RuntimeException::new);
     }
