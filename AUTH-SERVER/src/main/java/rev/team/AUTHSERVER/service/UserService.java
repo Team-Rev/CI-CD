@@ -9,6 +9,7 @@ import rev.team.AUTHSERVER.domain.request.FindPwReq;
 import rev.team.AUTHSERVER.domain.request.UpdatePwReq;
 import rev.team.AUTHSERVER.repository.RevUserRepository;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,17 +68,18 @@ public class UserService {
         });
     }
 
+    @Transactional
     public String updateUser(RevUser user) {
         RevUser updateUser = userRepository.findById(user.getUserId()).get();
 
-        /*updateUser.setName(user.getName());
+        updateUser.setName(user.getName());
         updateUser.setNickname(user.getNickname());
         updateUser.setPassword(user.getPassword());
         updateUser.setDOB(user.getDOB());
         updateUser.setPhone(user.getPhone());
         updateUser.setAddress(user.getAddress());
         updateUser.setDetailAddress(user.getDetailAddress());
-        updateUser.setPostNumber(user.getPostNumber());*/
+        updateUser.setPostNumber(user.getPostNumber());
 
         userRepository.save(updateUser);
         return "OK";
