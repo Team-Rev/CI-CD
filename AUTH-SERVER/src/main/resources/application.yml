@@ -17,53 +17,11 @@ spring:
     username: root
     password: teamrev2021
 
-<<<<<<< HEAD:AUTH-SERVER/src/main/resources/application.yml
-=======
-zuul:
-  routes:
-    PROBLEM-SERVICE:
-      path: /problem/**
-      serviceId: PROBLEM-SERVICE
-    BOARD-SERVICE:
-      path: /board/**
-      serviceId: BOARD-SERVICE
-    INQUIRY-SERVICE:
-      path: /inquiry/**
-      serviceId: INQUIRY-SERVICE
-    POINT-SERVICE:
-      path: /point/**
-      serviceId: POINT-SERVICE
-    AUTH-SERVICE:
-      path: /auth/**
-      serviceId: AUTH-SERVICE
-  host:
-    time-to-live: 1
-    connect-timeout-millis: 5000
-    max-per-route-connections: 10000
-    max-total-connections: 5000
-    socket-timeout-millis: 60000
-  semaphore:
-    max-semaphores: 500
-
-ribbon:
-  eureka:
-    enabled: true
-  ConnectTimeout: 30000
-  ReadTimeout: 30000
-
->>>>>>> api-gateway:API-GATEWAY/src/main/resources/application.yml
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-<<<<<<< HEAD:AUTH-SERVER/src/main/resources/application.yml
       defaultZone: http://10.178.0.2:8761/eureka
   instance:
     hostname: 10.178.0.2
-=======
-#      defaultZone: http://localhost:8761/eureka
-      defaultZone: http://10.178.0.2:8761/eureka
-  instance:
-    hostname: 10.178.0.2
->>>>>>> api-gateway:API-GATEWAY/src/main/resources/application.yml
