@@ -38,6 +38,7 @@ public class CommentService {
         return "OK";
     }
 
+    @Transactional
     public String delete(Long commentId, Long refAsk) {
         askRepository.downReComments(refAsk); // 질문 글에 댓글 수 -1
         commentRepository.deleteById(commentId);
