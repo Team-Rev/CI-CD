@@ -42,7 +42,7 @@ public class CommentService {
 
         Comment comment = commentRepository.findById(commentId).get();
 
-        if (comment.getUserId() == userId) {
+        if (comment.getUserId().equals(userId)) {
             askRepository.downReComments(refAsk); // 질문 글에 댓글 수 -1
             commentRepository.deleteById(commentId);
 
