@@ -34,7 +34,7 @@ public class CommentController {
 
     //삭제
     @DeleteMapping("")
-    public String delete(@RequestParam String userId, @RequestParam Long commentId, @RequestParam Long refAsk){
-        return commentService.delete(userId, commentId, refAsk);
+    public String delete(@RequestParam Long commentId, @RequestParam Long refAsk){
+        return commentService.delete(commentId, refAsk);
     }
 }

@@ -38,17 +38,11 @@ public class CommentService {
         return "OK";
     }
 
-    public String delete(String userId, Long commentId, Long refAsk) {
+    public String delete(Long commentId, Long refAsk) {
+        askRepository.downReComments(refAsk); // 질문 글에 댓글 수 -1
+        commentRepository.deleteById(commentId);
 
-        Comment comment = commentRepository.findById(commentId).get();
-
-        if (comment.getUserId().equals(userId)) {
-            askRepository.downReComments(refAsk); // 질문 글에 댓글 수 -1
-            commentRepository.deleteById(commentId);
-
-            return "OK";
-        }
-        return "not matched user or not existed comment";
+        return "OK";
     }
 
     public List<Comment> getComments(Long askId, Integer page) {
