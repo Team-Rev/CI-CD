@@ -68,17 +68,17 @@ public class UserService {
     }
 
     public String updateUser(RevUser user) {
-        userRepository.save(user.builder()
-                .name(user.getName())
-                .nickname(user.getNickname())
-                .password(user.getPassword())
-                .DOB(user.getDOB())
-                .phone(user.getPhone())
-                .address(user.getAddress())
-                .detailAddress(user.getDetailAddress())
-                .postNumber(user.getPostNumber())
-                .build());
+        RevUser updateUser = userRepository.findById(user.getUserId()).get();
+        updateUser.setName(user.getName());
+        updateUser.setNickname(user.getNickname());
+        updateUser.setPassword(user.getPassword());
+        updateUser.setDOB(user.getDOB());
+        updateUser.setPhone(user.getPhone());
+        updateUser.setAddress(user.getAddress());
+        updateUser.setDetailAddress(user.getDetailAddress());
+        updateUser.setPostNumber(user.getPostNumber());
 
+        userRepository.save(updateUser);
         return "OK";
     }
 

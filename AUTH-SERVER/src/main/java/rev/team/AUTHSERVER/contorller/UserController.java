@@ -21,7 +21,7 @@ public class UserController {
         return userService.findUser(userId).orElseThrow(RuntimeException::new);
     }
 
-    @PostMapping("userInfo")
+    @PatchMapping("userInfo")
     public String updateUser(@RequestBody RevUser user) {
         return userService.updateUser(user);
     }
