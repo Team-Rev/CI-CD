@@ -1,5 +1,6 @@
 package rev.team.AUTHSERVER.service;
 
+<<<<<<< HEAD:AUTH-SERVER/src/main/java/rev/team/AUTHSERVER/service/UserService.java
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import rev.team.AUTHSERVER.domain.RevAuthority;
@@ -8,13 +9,20 @@ import rev.team.AUTHSERVER.domain.request.FindIdReq;
 import rev.team.AUTHSERVER.domain.request.FindPwReq;
 import rev.team.AUTHSERVER.domain.request.UpdatePwReq;
 import rev.team.AUTHSERVER.repository.RevUserRepository;
+=======
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import rev.team.API_GATEWAY.user.domain.RevUser;
+>>>>>>> api-gateway:API-GATEWAY/src/main/java/rev/team/API_GATEWAY/user/service/RevUserService.java
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
+<<<<<<< HEAD:AUTH-SERVER/src/main/java/rev/team/AUTHSERVER/service/UserService.java
 public class UserService {
 
     private final RevUserRepository userRepository;
@@ -52,20 +60,25 @@ public class UserService {
                 save(user);
             }
         });
+=======
+@Transactional
+public class RevUserService implements UserDetailsService {
+        private final static String AUTH_SERVER = "10.178.0.2";
+
+    private String getURL(){
+        return "http://" + AUTH_SERVER + ":8775";
     }
 
-    public void removeAuthority(String userId, String authority){
-        userRepository.findById(userId).ifPresent(user->{
-            if(user.getAuthorities()==null) return;
-            RevAuthority targetRole = new RevAuthority(user.getUserId(), authority);
-            if(user.getAuthorities().contains(targetRole)){
-                user.setAuthorities(
-                        user.getAuthorities().stream().filter(auth->!auth.equals(targetRole))
-                                .collect(Collectors.toSet())
-                );
-                save(user);
-            }
-        });
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        RestTemplate api = new RestTemplate();
+        return api.getForEntity(getURL() + "/userInfo?userId=" + username, RevUser.class).getBody();
+>>>>>>> api-gateway:API-GATEWAY/src/main/java/rev/team/API_GATEWAY/user/service/RevUserService.java
+    }
+
+    public String getNickname(String username){
+        RestTemplate api = new RestTemplate();
+        return api.getForEntity(getURL() + "/nickname?userId=" + username, String.class).getBody();
     }
 
     @Transactional

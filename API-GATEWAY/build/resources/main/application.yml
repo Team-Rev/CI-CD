@@ -1,9 +1,9 @@
 server:
-  port: 8775
+  port: 8760
 
 spring:
   application:
-    name: AUTH-SERVICE
+    name: API-GATEWAY
   devtools:
     livereload:
       enabled: true
@@ -17,8 +17,6 @@ spring:
     username: root
     password: teamrev2021
 
-<<<<<<< HEAD:AUTH-SERVER/src/main/resources/application.yml
-=======
 zuul:
   routes:
     PROBLEM-SERVICE:
@@ -27,15 +25,9 @@ zuul:
     BOARD-SERVICE:
       path: /board/**
       serviceId: BOARD-SERVICE
-    INQUIRY-SERVICE:
-      path: /inquiry/**
-      serviceId: INQUIRY-SERVICE
     POINT-SERVICE:
       path: /point/**
       serviceId: POINT-SERVICE
-    AUTH-SERVICE:
-      path: /auth/**
-      serviceId: AUTH-SERVICE
   host:
     time-to-live: 1
     connect-timeout-millis: 5000
@@ -51,19 +43,12 @@ ribbon:
   ConnectTimeout: 30000
   ReadTimeout: 30000
 
->>>>>>> api-gateway:API-GATEWAY/src/main/resources/application.yml
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-<<<<<<< HEAD:AUTH-SERVER/src/main/resources/application.yml
-      defaultZone: http://10.178.0.2:8761/eureka
+#      defaultZone: http://3.35.24.199:8761/eureka
+      defaultZone: http://10.178.0.3:8761/eureka
   instance:
-    hostname: 10.178.0.2
-=======
-#      defaultZone: http://localhost:8761/eureka
-      defaultZone: http://10.178.0.2:8761/eureka
-  instance:
-    hostname: 10.178.0.2
->>>>>>> api-gateway:API-GATEWAY/src/main/resources/application.yml
+    hostname: 10.178.0.3
