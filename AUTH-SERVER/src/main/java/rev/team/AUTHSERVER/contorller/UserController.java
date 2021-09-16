@@ -51,7 +51,6 @@ public class UserController {
         return userService.findPw(findPwReq);
     }
 
-    // TODO : 사용자 유무 확인 후 비밀번호 변경
     @PatchMapping("/updatePw")
     public String updatePw(@RequestBody UpdatePwReq updatePwReq) {
         return userService.updatePw(updatePwReq); }

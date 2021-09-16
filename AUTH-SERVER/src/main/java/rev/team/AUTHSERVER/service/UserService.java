@@ -69,14 +69,15 @@ public class UserService {
 
     public String updateUser(RevUser user) {
         RevUser updateUser = userRepository.findById(user.getUserId()).get();
-        updateUser.setName(user.getName());
+
+        /*updateUser.setName(user.getName());
         updateUser.setNickname(user.getNickname());
         updateUser.setPassword(user.getPassword());
         updateUser.setDOB(user.getDOB());
         updateUser.setPhone(user.getPhone());
         updateUser.setAddress(user.getAddress());
         updateUser.setDetailAddress(user.getDetailAddress());
-        updateUser.setPostNumber(user.getPostNumber());
+        updateUser.setPostNumber(user.getPostNumber());*/
 
         userRepository.save(updateUser);
         return "OK";
