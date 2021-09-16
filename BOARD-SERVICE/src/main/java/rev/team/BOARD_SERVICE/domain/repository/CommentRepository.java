@@ -12,7 +12,4 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     List<Comment> findAllByRefAsk(Long askId, Pageable pageable);
-
-    @Query("SELECT c FROM Comment c WHERE c.commentId = :commentId AND c.userId = :userId")
-    boolean findCommentByUserId(String userId, Long commentId);
 }
