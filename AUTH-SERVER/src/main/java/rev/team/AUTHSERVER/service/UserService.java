@@ -72,7 +72,6 @@ public class UserService {
     public String updateUser(RevUser user) {
         RevUser updateUser = userRepository.findById(user.getUserId()).get();
 
-        updateUser.setPassword(user.getPassword());
         updateUser.setDOB(user.getDOB());
         updateUser.setPhone(user.getPhone());
         updateUser.setAddress(user.getAddress());
