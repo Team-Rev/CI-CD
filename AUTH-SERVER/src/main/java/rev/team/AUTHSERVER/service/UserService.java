@@ -1,6 +1,7 @@
 package rev.team.AUTHSERVER.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import rev.team.AUTHSERVER.domain.RevAuthority;
 import rev.team.AUTHSERVER.domain.RevUser;
 import rev.team.AUTHSERVER.domain.request.FindIdReq;
@@ -66,6 +67,21 @@ public class UserService {
         });
     }
 
+    public String updateUser(RevUser user) {
+        userRepository.save(user.builder()
+                .name(user.getName())
+                .nickname(user.getNickname())
+                .password(user.getPassword())
+                .DOB(user.getDOB())
+                .phone(user.getPhone())
+                .address(user.getAddress())
+                .detailAddress(user.getDetailAddress())
+                .postNumber(user.getPostNumber())
+                .build());
+
+        return "OK";
+    }
+
     public String findId(FindIdReq findIdReq) {
         Optional<RevUser> revUser = userRepository.findUserIdByNameAndPhone(findIdReq.getName(), findIdReq.getPhone());
 
@@ -86,7 +102,7 @@ public class UserService {
         }
     }
 
-    public String changeNewPw(UpdatePwReq updatePwReq) {
+    public String updatePw(UpdatePwReq updatePwReq) {
         Optional<RevUser> revUser = userRepository.findById(updatePwReq.getUserId());
 
         if (revUser.isEmpty()) {
