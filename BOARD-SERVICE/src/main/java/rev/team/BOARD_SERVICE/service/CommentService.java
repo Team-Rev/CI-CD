@@ -26,7 +26,7 @@ public class CommentService {
 
     @Transactional
     public String create(Comment comment) {
-        askRepository.updateReComments(comment.getRefAsk()); // 질문 글에 댓글 수 +1
+        askRepository.upReComments(comment.getRefAsk()); // 질문 글에 댓글 수 +1
 
         commentRepository.save(Comment.builder()
                 .userId(comment.getUserId())
@@ -38,10 +38,17 @@ public class CommentService {
         return "OK";
     }
 
-    public String delete(Long commentId) {
-        commentRepository.deleteById(commentId);
+    public String delete(String userId, Long commentId, Long refAsk) {
 
-        return "OK";
+        Comment comment = commentRepository.findById(commentId).get();
+
+        if (comment.getUserId() == userId) {
+            askRepository.downReComments(refAsk); // 질문 글에 댓글 수 -1
+            commentRepository.deleteById(commentId);
+
+            return "OK";
+        }
+        return "not matched user or not existed comment";
     }
 
     public List<Comment> getComments(Long askId, Integer page) {

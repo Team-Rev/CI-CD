@@ -16,8 +16,12 @@ public interface AskRepository extends JpaRepository<Ask, Long> {
     void hits(@Param("id")Long id);
 
     @Modifying
-    @Query(value = "UPDATE Ask SET comments = comments +1 WHERE askId = :id")
-    void updateReComments(@Param("id")Long id);
+    @Query(value = "UPDATE Ask SET comments = comments + 1 WHERE askId = :id")
+    void upReComments(@Param("id")Long id);
+
+    @Modifying
+    @Query(value = "UPDATE Ask SET comments = comments - 1 WHERE askId = :id")
+    void downReComments(@Param("id")Long id);
 
     @Query(value = "SELECT * FROM ask ORDER BY hits DESC LIMIT 6;", nativeQuery = true)
     List<Ask> findAllDesc();
