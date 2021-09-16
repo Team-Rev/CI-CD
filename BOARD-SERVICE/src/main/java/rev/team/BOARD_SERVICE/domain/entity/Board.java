@@ -1,3 +1,4 @@
+/*
 package rev.team.BOARD_SERVICE.domain.entity;
 
 import lombok.AllArgsConstructor;
@@ -5,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import rev.team.BOARD_SERVICE.util.Category;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,38 +15,33 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Builder
-
 @Entity
-
-@Table(name = "ask")
-
-public class Ask {
-
+@Table(name = "board", indexes = {@Index(columnList = "board_id")})
+public class Board {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "ask_id")
-    private Long askId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_id")
+    private Long boardId;
 
-    private String userId; // 작성자
+    private String userId;
 
-    private String nickname; // 작성자 작성 시 닉네임
-
-    @Column(columnDefinition = "TEXT")
-    private String title; // 제목
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @Column(columnDefinition = "TEXT")
-    private String content; // 내용
+    private String title;
 
-    @Column(columnDefinition = "integer default 0")
-    private Integer comments = 0;
+    @Column(columnDefinition = "TEXT")
+    private String content;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    private Date postDate; // 작성일
+    private Date postDate;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer hits = 0; // 조회수
+    private Integer hits = 0;
 
     @Column(columnDefinition = "integer default 0")
-    private Integer recommend = 0;
+    private Integer status = 0;
 }
+*/

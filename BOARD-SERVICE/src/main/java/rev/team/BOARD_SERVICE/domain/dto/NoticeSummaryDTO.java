@@ -4,15 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.domain.Page;
-import rev.team.BOARD_SERVICE.domain.entity.Ask;
+
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 
-public class AskPageDTO {
-    private Long pageCount;
-    private Page<Ask> asks;
+public class NoticeSummaryDTO {
+    private Long noticeId;
+
+    private String title;
+
+    private Date postDate;
+
+    private Integer hits = 0;
+
+    private String nickname;
 }
