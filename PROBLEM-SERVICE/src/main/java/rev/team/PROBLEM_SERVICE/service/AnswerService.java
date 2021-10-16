@@ -65,6 +65,7 @@ public class AnswerService {
         Optional<AnswerMain> mainOptional = answerMainRepository.findById(id);
         AnswerMain main;
         List<AnswerDetailDTO> answerDetailDTOS = new ArrayList<>();
+
         if(mainOptional.isPresent()) {
             main = mainOptional.get();
             // 메인 에서 디테일 꺼내서 반복문 돌림
@@ -79,6 +80,16 @@ public class AnswerService {
                 Set<Long> choices = new HashSet<>();
                 for(AnswerChoice choice : detail.getChoices()) choices.add(choice.getMultipleChoiceId());
                 answerDetailDTO.setChoices(choices);
+
+                // 키워드
+                List<Long> categoryIds = answerMainRepository.findCategoryId(detail.getQuestionId());
+                List<String> keywords = new ArrayList<>();;
+
+                for(Long categoryId : categoryIds) {
+                    keywords.add(answerMainRepository.findKeyword(categoryId));
+                }
+
+                answerDetailDTO.setKeywords(keywords);
 
                 // AnswerDetailDTO 리스트에 담아서 리턴
                 answerDetailDTOS.add((answerDetailDTO));

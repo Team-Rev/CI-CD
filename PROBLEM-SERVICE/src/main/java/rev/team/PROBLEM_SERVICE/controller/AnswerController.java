@@ -43,6 +43,7 @@ public class AnswerController {
     }
 
     // 김태영 CREATED AT 2021-05-14 결과 메인에서 디테일하게 보고싶은 메인의 ID를 이용해서 조회할 수 있음
+    // TODO: 취약 키워드 추가
     @GetMapping("/answer/detail")
     public List<AnswerDetailDTO> getDetail(@RequestParam("id") Long id){ // AnswerMainId
         return answerService.getDetail(id);

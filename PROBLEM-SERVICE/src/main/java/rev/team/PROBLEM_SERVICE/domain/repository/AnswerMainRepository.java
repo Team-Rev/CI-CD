@@ -20,4 +20,10 @@ public interface AnswerMainRepository extends JpaRepository<AnswerMain, Long> {
     void updateCorrect(int count, Long id);
 
     List<AnswerSummary> findAllByUserId(String userId, Pageable pageable);
+
+    @Query(value = "SELECT category_id FROM relation_category WHERE (question_id = :id);", nativeQuery = true)
+    List<Long> findCategoryId(Long id);
+
+    @Query(value = "SELECT name FROM category WHERE (id = :id);", nativeQuery = true)
+    String findKeyword(Long id);
 }
